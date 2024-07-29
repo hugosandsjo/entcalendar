@@ -1,6 +1,8 @@
 import { sql } from "@vercel/postgres";
+import { unstable_noStore as noStore } from "next/cache";
 
 export async function fetchEntries() {
+  noStore();
   try {
     const data = await sql`
           SELECT * FROM entries`;
