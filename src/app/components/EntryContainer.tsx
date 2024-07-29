@@ -11,6 +11,7 @@ async function EntryContainer() {
       <div className="flex w-[calc(100%+6rem)] gap-6 overflow-x-auto first:pl-10 last:pr-10 scrollbar-hide">
         {entries.rows.map((entry) => (
           <Entry
+            key={entry.id}
             title={entry.title}
             category={entry.category}
             genre={entry.genre}
