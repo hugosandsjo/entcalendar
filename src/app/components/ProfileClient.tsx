@@ -1,8 +1,7 @@
 "use client";
 
 import { useUser } from "@auth0/nextjs-auth0/client";
-import { useEffect, useState } from "react";
-import { fetchEntries } from "../lib/data";
+import { useState } from "react";
 
 export default function ProfileClient() {
   const { user, error, isLoading } = useUser();
