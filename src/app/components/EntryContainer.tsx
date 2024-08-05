@@ -1,14 +1,14 @@
 "use client";
 
 import React from "react";
-import Entry from "./Entry";
+import Entry, { EntryProps } from "./Entry";
 import { useEffect, useState } from "react";
 // import { fetchEntries } from "@/app/lib/data";
 import { useUser } from "@auth0/nextjs-auth0/client";
 
 function EntryContainer() {
   const { user, isLoading } = useUser();
-  const [entries, setEntries] = useState([]);
+  const [entries, setEntries] = useState<EntryProps[]>([]);
   const [loadingEntries, setLoadingEntries] = useState(true);
 
   useEffect(() => {
