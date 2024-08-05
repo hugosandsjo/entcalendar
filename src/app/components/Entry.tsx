@@ -1,7 +1,8 @@
 import React from "react";
 import InfoTag from "./InfoTag";
 
-type EntryProps = {
+export type EntryProps = {
+  id?: string;
   title: string;
   category: string;
   genre: string;
