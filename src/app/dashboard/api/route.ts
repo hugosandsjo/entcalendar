@@ -1,15 +1,15 @@
 // src/app/api/entries/route.js
+import { NextRequest, NextResponse } from "next/server";
 import { sql } from "@vercel/postgres";
-import { NextResponse } from "next/server";
-import { unstable_noStore as noStore } from "next/cache";
+// import { unstable_noStore as noStore } from "next/cache";
 
-export async function GET(request) {
-  noStore();
+export async function GET(request: NextRequest) {
+  // noStore();
 
   const { searchParams } = new URL(request.url);
   const userSub = searchParams.get("userSub");
   console.log(userSub);
-  console.log(request); // Log the entire request object
+  console.log(request);
 
   try {
     const data = await sql`SELECT * FROM entries WHERE user_sub = ${userSub}`;
