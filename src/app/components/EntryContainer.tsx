@@ -3,7 +3,6 @@
 import React from "react";
 import Entry, { EntryProps } from "./Entry";
 import { useEffect, useState } from "react";
-// import { fetchEntries } from "@/app/lib/data";
 import { useUser } from "@auth0/nextjs-auth0/client";
 
 function EntryContainer() {
@@ -15,9 +14,8 @@ function EntryContainer() {
     const getEntries = async () => {
       if (user) {
         console.log("User sub:", user.sub);
-        // console.log("User object:", user);
         try {
-          const response = await fetch(`/api/entries?userSub=${user.sub}`);
+          const response = await fetch(`/dashboard/api?userSub=${user.sub}`);
           const data = await response.json();
           console.log("API Response:", data);
           setEntries(data.rows);
