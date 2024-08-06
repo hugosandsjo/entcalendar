@@ -1,15 +1,46 @@
-import React from "react";
-import Entry from "./Entry";
-import { fetchEntries } from "@/app/lib/data";
+"use client";
 
-async function EntryContainer() {
-  const entries = await fetchEntries();
-  console.log(entries.rows);
+import React from "react";
+import Entry, { EntryProps } from "./Entry";
+import { useEffect, useState } from "react";
+import { useUser } from "@auth0/nextjs-auth0/client";
+
+function EntryContainer() {
+  const { user, isLoading } = useUser();
+  const [entries, setEntries] = useState<EntryProps[]>([]);
+  const [loadingEntries, setLoadingEntries] = useState(true);
+
+  useEffect(() => {
+    const getEntries = async () => {
+      if (user) {
+        console.log("User sub:", user.sub);
+        try {
+          const response = await fetch(`/dashboard/api?userSub=${user.sub}`);
+          const data = await response.json();
+          console.log("API Response:", data);
+          setEntries(data.rows);
+        } catch (error) {
+          console.error("Error fetching entries:", error);
+        }
+        setLoadingEntries(false);
+      }
+    };
+
+    getEntries();
+  }, [user]);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!user) {
+    return <div>Please log in to see your entries.</div>;
+  }
 
   return (
     <section className="relative -left-12 w-full">
       <div className="flex w-[calc(100%+6rem)] gap-6 overflow-x-auto first:pl-10 last:pr-10 scrollbar-hide">
-        {entries.rows.map((entry) => (
+        {entries.map((entry) => (
           <Entry
             key={entry.id}
             title={entry.title}
