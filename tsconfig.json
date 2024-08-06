@@ -27,7 +27,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/app/login/actions.js",
-    "src/app/components/EntryContainer.jsx"
+    "src/app/components/EntryContainer.jsx",
+    "src/app/new/page.tsx"
   ],
   "exclude": ["node_modules"]
 }
