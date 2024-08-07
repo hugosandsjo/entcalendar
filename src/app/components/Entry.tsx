@@ -1,8 +1,9 @@
 import React from "react";
 import InfoTag from "./InfoTag";
+import { deleteEntry } from "../actions/actions";
 
 export type EntryProps = {
-  id?: string;
+  id: number;
   title: string;
   category: string;
   genre: string;
@@ -10,9 +11,17 @@ export type EntryProps = {
   year: number;
   publisher?: string;
   description: string;
+  month: string;
+  onDelete: (id: number) => void;
+};
+
+const handleClick = async (id: number, onDelete: (id: number) => void) => {
+  await deleteEntry(id);
+  onDelete(id);
 };
 
 function Entry({
+  id,
   title,
   category,
   genre,
@@ -20,6 +29,8 @@ function Entry({
   year,
   publisher,
   description,
+  month,
+  onDelete,
 }: EntryProps) {
   return (
     <div className="min-w-96 p-6 flex flex-col gap-4 justify-between border border-black rounded-sm ">
@@ -36,6 +47,13 @@ function Entry({
       <div>
         <p>{description}</p>
       </div>
+      <button className="border hover:bg-sky-300">Edit</button>
+      <button
+        className="border hover:bg-red-500"
+        onClick={() => handleClick(id, onDelete)}
+      >
+        Delete
+      </button>
     </div>
   );
 }
