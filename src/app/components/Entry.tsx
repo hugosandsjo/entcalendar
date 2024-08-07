@@ -11,6 +11,7 @@ export type EntryProps = {
   year: number;
   publisher?: string;
   description: string;
+  month: string;
   onDelete: (id: number) => void;
 };
 
@@ -28,6 +29,7 @@ function Entry({
   year,
   publisher,
   description,
+  month,
   onDelete,
 }: EntryProps) {
   return (
@@ -45,8 +47,9 @@ function Entry({
       <div>
         <p>{description}</p>
       </div>
+      <button className="border hover:bg-sky-300">Edit</button>
       <button
-        className="border hover:bg-sky-300"
+        className="border hover:bg-red-500"
         onClick={() => handleClick(id, onDelete)}
       >
         Delete
