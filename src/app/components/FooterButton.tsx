@@ -5,7 +5,7 @@ type FooterButtonProps = {
 function FooterButton({ text }: FooterButtonProps) {
   return (
     <>
-      <p className="hover:underline mb-2">{text}</p>
+      <p className="hover:underline">{text}</p>
     </>
   );
 }
