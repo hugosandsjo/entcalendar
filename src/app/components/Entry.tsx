@@ -1,7 +1,6 @@
 import React from "react";
 import InfoTag from "./InfoTag";
 import { deleteEntry } from "../actions/actions";
-import { ClassNames } from "@emotion/react";
 
 export type EntryProps = {
   id: number;
@@ -29,8 +28,8 @@ function Entry({
   year,
   publisher,
   description,
-  onDelete, // Add the onDelete function as a prop
-}: EntryProps & { onDelete: (id: number) => void }) {
+  onDelete,
+}: EntryProps) {
   return (
     <div className="min-w-96 p-6 flex flex-col gap-4 justify-between border border-black rounded-sm ">
       <div>
@@ -46,7 +45,10 @@ function Entry({
       <div>
         <p>{description}</p>
       </div>
-      <button className="border" onClick={() => handleClick(id, onDelete)}>
+      <button
+        className="border hover:bg-sky-300"
+        onClick={() => handleClick(id, onDelete)}
+      >
         Delete
       </button>
     </div>

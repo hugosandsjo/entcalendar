@@ -1,14 +1,9 @@
 import React from "react";
-import { ReactNode } from "react";
 import EntryContainer from "./EntryContainer";
 import Month from "./Month";
 import ProfileClient from "./ProfileClient";
 
-type MainProps = {
-  children: ReactNode;
-};
-
-function Main({ children }: MainProps) {
+function Main() {
   return (
     <main className="p-10 flex flex-col gap-10">
       <ProfileClient />

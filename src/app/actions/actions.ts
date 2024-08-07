@@ -1,7 +1,6 @@
 "use server";
 
 import { sql } from "@vercel/postgres";
-// import internal from "stream";
 
 export const addEntry = async (formData: FormData) => {
   const user_sub = formData.get("user_sub") as string | null;
@@ -11,6 +10,18 @@ export const addEntry = async (formData: FormData) => {
   const director = formData.get("director") as string | null;
   const year = formData.get("year") as string | null;
   const description = formData.get("description") as string | null;
+  const month = formData.get("month") as string | null;
+
+  console.log("Submitted form data:", {
+    user_sub,
+    title,
+    category,
+    genre,
+    director,
+    year,
+    description,
+    month,
+  });
 
   if (
     !user_sub ||
@@ -19,14 +30,15 @@ export const addEntry = async (formData: FormData) => {
     !genre ||
     !director ||
     !year ||
-    !description
+    !description ||
+    !month
   ) {
     throw new Error("Missing required form data");
   }
 
   await sql`
-        INSERT INTO entries (user_sub, title, category, genre, director, year, description)
-        VALUES (${user_sub}, ${title}, ${category}, ${genre}, ${director}, ${year}, ${description})
+        INSERT INTO entries (user_sub, title, category, genre, director, year, description, month)
+        VALUES (${user_sub}, ${title}, ${category}, ${genre}, ${director}, ${year}, ${description}, ${month})
       `;
 };
 
