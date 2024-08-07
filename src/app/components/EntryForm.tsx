@@ -4,7 +4,7 @@ import React, { useRef, useEffect } from "react";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { addEntry } from "../actions/actions";
 
-export default function EntryForm() {
+function EntryForm() {
   const { user, isLoading } = useUser();
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -37,13 +37,30 @@ export default function EntryForm() {
 
   return (
     <>
-      <h1>New Entry</h1>
-      <div className="flex-col w-screen bg-slate-400">
+      <div className="flex w-screen justify-center mb-12">
         <form
           ref={formRef}
-          className="flex flex-col p-8"
+          className="flex flex-col p-12 bg-slate-400"
           onSubmit={handleSubmit}
         >
+          <h1>New Entry</h1>
+
+          <label htmlFor="options">Month</label>
+          <select id="month" name="month">
+            <option value="january">January</option>
+            <option value="february">February</option>
+            <option value="march">March</option>
+            <option value="april">April</option>
+            <option value="may">May</option>
+            <option value="june">June</option>
+            <option value="july">July</option>
+            <option value="august">August</option>
+            <option value="september">September</option>
+            <option value="october">October</option>
+            <option value="november">November</option>
+            <option value="december">December</option>
+          </select>
+
           <input type="hidden" id="user_sub" name="user_sub" required></input>
 
           <label htmlFor="title">Title</label>
@@ -76,3 +93,5 @@ export default function EntryForm() {
     </>
   );
 }
+
+export default EntryForm;
