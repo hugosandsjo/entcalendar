@@ -38,10 +38,10 @@ function EntryForm() {
 
   return (
     <>
-      <div className="flex w-screen justify-center mb-12">
+      <section className="flex w-screen justify-center mb-12">
         <form
           ref={formRef}
-          className="flex flex-col p-12 bg-slate-400"
+          className="flex flex-col w-2/3 p-12 bg-slate-200 border"
           onSubmit={handleSubmit}
         >
           <h1 className="text-3xl">New Entry</h1>
@@ -68,8 +68,6 @@ function EntryForm() {
           <input type="hidden" id="user_sub" name="user_sub" required></input>
           <label htmlFor="title">Title</label>
           <input type="text" id="title" name="title" required></input>
-          {/* <label htmlFor="category">Category</label> */}
-          {/* <input type="text" id="category" name="category" required></input> */}
           <label htmlFor="genre">Genre</label>
           <input type="text" id="genre" name="genre" required></input>
           <label htmlFor="director">Director</label>
@@ -87,7 +85,7 @@ function EntryForm() {
             Submit
           </button>
         </form>
-      </div>
+      </section>
     </>
   );
 }

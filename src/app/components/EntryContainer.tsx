@@ -5,7 +5,11 @@ import Entry, { EntryProps } from "./Entry";
 import { useEffect, useState } from "react";
 import { useUser } from "@auth0/nextjs-auth0/client";
 
-function EntryContainer() {
+type EntryContainerProps = {
+  month: string;
+};
+
+function EntryContainer({ month }: EntryContainerProps) {
   const { user, isLoading } = useUser();
   const [entries, setEntries] = useState<EntryProps[]>([]);
 
@@ -36,10 +40,12 @@ function EntryContainer() {
     return <div>Please log in to see your entries.</div>;
   }
 
+  const filteredEntries = entries.filter((entry) => entry.month === month);
+
   return (
     <section className="relative -left-12 w-full">
       <div className="flex w-[calc(100%+6rem)] gap-6 overflow-x-auto first:pl-10 last:pr-10 scrollbar-hide">
-        {entries.map((entry) => (
+        {filteredEntries.map((entry) => (
           <Entry
             key={entry.id}
             id={entry.id}
@@ -49,6 +55,7 @@ function EntryContainer() {
             director={entry.director}
             year={entry.year}
             description={entry.description}
+            month={entry.month}
             onDelete={handleDelete}
           />
         ))}
