@@ -8,26 +8,25 @@ import { useUser } from "@auth0/nextjs-auth0/client";
 function EntryContainer() {
   const { user, isLoading } = useUser();
   const [entries, setEntries] = useState<EntryProps[]>([]);
-  const [loadingEntries, setLoadingEntries] = useState(true);
 
   useEffect(() => {
     const getEntries = async () => {
       if (user) {
-        console.log("User sub:", user.sub);
         try {
           const response = await fetch(`/dashboard/api?userSub=${user.sub}`);
           const data = await response.json();
-          console.log("API Response:", data);
           setEntries(data.rows);
         } catch (error) {
           console.error("Error fetching entries:", error);
         }
-        setLoadingEntries(false);
       }
     };
-
     getEntries();
   }, [user]);
+
+  const handleDelete = (id: number) => {
+    setEntries(entries.filter((entry) => entry.id !== id));
+  };
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -43,12 +42,14 @@ function EntryContainer() {
         {entries.map((entry) => (
           <Entry
             key={entry.id}
+            id={entry.id}
             title={entry.title}
             category={entry.category}
             genre={entry.genre}
             director={entry.director}
             year={entry.year}
             description={entry.description}
+            onDelete={handleDelete}
           />
         ))}
       </div>
