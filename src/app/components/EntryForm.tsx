@@ -4,6 +4,7 @@ import React, { useRef, useEffect } from "react";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import RadioButton from "../components/RadioButton";
 import { addEntry } from "../actions/actions";
+import FormInput from "../components/FormInput";
 
 function EntryForm() {
   const { user, isLoading } = useUser();
@@ -41,12 +42,12 @@ function EntryForm() {
       <section className="flex w-screen justify-center mb-12">
         <form
           ref={formRef}
-          className="flex flex-col w-2/3 p-12 bg-slate-200 border"
+          className="flex flex-col w-screen p-8  border gap-2"
           onSubmit={handleSubmit}
         >
-          <h1 className="text-3xl">New Entry</h1>
+          <h1 className="text-5xl mb-4">New Entry</h1>
           <label htmlFor="options">Month</label>
-          <select id="month" name="month">
+          <select className="p-4 border border-black" id="month" name="month">
             <option value="january">January</option>
             <option value="february">February</option>
             <option value="march">March</option>
@@ -61,27 +62,22 @@ function EntryForm() {
             <option value="december">December</option>
           </select>
           <label htmlFor="category">Category</label>
-          <RadioButton category="Book" />
-          <RadioButton category="Movie" />
-          <RadioButton category="Series" />
-          <RadioButton category="Game" />
+          <div className="flex gap-2 my-2">
+            <RadioButton category="Book" />
+            <RadioButton category="Movie" />
+            <RadioButton category="Series" />
+            <RadioButton category="Game" />
+          </div>
           <input type="hidden" id="user_sub" name="user_sub" required></input>
-          <label htmlFor="title">Title</label>
-          <input type="text" id="title" name="title" required></input>
-          <label htmlFor="genre">Genre</label>
-          <input type="text" id="genre" name="genre" required></input>
-          <label htmlFor="director">Director</label>
-          <input type="text" id="director" name="director" required></input>
-          <label htmlFor="year">Year</label>
-          <input type="text" id="year" name="year" required></input>
-          <label htmlFor="description">Description</label>
-          <input
-            type="text"
-            id="description"
-            name="description"
-            required
-          ></input>
-          <button type="submit" className="mt-4 p-2 bg-blue-500 text-white">
+          <FormInput title="Title" name="title" />
+          <FormInput title="Genre" name="genre" />
+          <FormInput title="Director" name="director" />
+          <FormInput title="Year" name="year" />
+          <FormInput title="Description" name="description" />
+          <button
+            type="submit"
+            className="mt-4 p-4 border border-black rounded-md bg-black text-white hover:opacity-60"
+          >
             Submit
           </button>
         </form>
