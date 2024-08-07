@@ -1,8 +1,10 @@
 import React from "react";
 import InfoTag from "./InfoTag";
+import { deleteEntry } from "../actions/actions";
+import { ClassNames } from "@emotion/react";
 
 export type EntryProps = {
-  id?: string;
+  id: number;
   title: string;
   category: string;
   genre: string;
@@ -10,9 +12,16 @@ export type EntryProps = {
   year: number;
   publisher?: string;
   description: string;
+  onDelete: (id: number) => void;
+};
+
+const handleClick = async (id: number, onDelete: (id: number) => void) => {
+  await deleteEntry(id);
+  onDelete(id);
 };
 
 function Entry({
+  id,
   title,
   category,
   genre,
@@ -20,7 +29,8 @@ function Entry({
   year,
   publisher,
   description,
-}: EntryProps) {
+  onDelete, // Add the onDelete function as a prop
+}: EntryProps & { onDelete: (id: number) => void }) {
   return (
     <div className="min-w-96 p-6 flex flex-col gap-4 justify-between border border-black rounded-sm ">
       <div>
@@ -36,6 +46,9 @@ function Entry({
       <div>
         <p>{description}</p>
       </div>
+      <button className="border" onClick={() => handleClick(id, onDelete)}>
+        Delete
+      </button>
     </div>
   );
 }
