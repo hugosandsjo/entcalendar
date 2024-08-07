@@ -2,6 +2,7 @@
 
 import React, { useRef, useEffect } from "react";
 import { useUser } from "@auth0/nextjs-auth0/client";
+import RadioButton from "../components/RadioButton";
 import { addEntry } from "../actions/actions";
 
 function EntryForm() {
@@ -43,8 +44,7 @@ function EntryForm() {
           className="flex flex-col p-12 bg-slate-400"
           onSubmit={handleSubmit}
         >
-          <h1>New Entry</h1>
-
+          <h1 className="text-3xl">New Entry</h1>
           <label htmlFor="options">Month</label>
           <select id="month" name="month">
             <option value="january">January</option>
@@ -60,24 +60,22 @@ function EntryForm() {
             <option value="november">November</option>
             <option value="december">December</option>
           </select>
-
+          <label htmlFor="category">Category</label>
+          <RadioButton category="Book" />
+          <RadioButton category="Movie" />
+          <RadioButton category="Series" />
+          <RadioButton category="Game" />
           <input type="hidden" id="user_sub" name="user_sub" required></input>
-
           <label htmlFor="title">Title</label>
           <input type="text" id="title" name="title" required></input>
-
-          <label htmlFor="category">Category</label>
-          <input type="text" id="category" name="category" required></input>
-
+          {/* <label htmlFor="category">Category</label> */}
+          {/* <input type="text" id="category" name="category" required></input> */}
           <label htmlFor="genre">Genre</label>
           <input type="text" id="genre" name="genre" required></input>
-
           <label htmlFor="director">Director</label>
           <input type="text" id="director" name="director" required></input>
-
           <label htmlFor="year">Year</label>
           <input type="text" id="year" name="year" required></input>
-
           <label htmlFor="description">Description</label>
           <input
             type="text"
