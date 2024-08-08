@@ -10,7 +10,11 @@ function Header() {
         {" "}
         <h1 className="text-4xl hover:opacity-30">Diary</h1>
       </Link>
-      <LogButton></LogButton>
+      <Link href="/dashboard">
+        <p className="hover:underline">Dashboard</p>
+      </Link>
+      <LogButton />
+
       <Link href="/new">
         <Image
           className="hover:opacity-30"

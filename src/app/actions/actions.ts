@@ -1,6 +1,8 @@
 "use server";
 
 import { sql } from "@vercel/postgres";
+import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 
 export const addEntry = async (formData: FormData) => {
   const user_sub = formData.get("user_sub") as string | null;
@@ -40,6 +42,9 @@ export const addEntry = async (formData: FormData) => {
         INSERT INTO entries (user_sub, title, category, genre, director, year, description, month)
         VALUES (${user_sub}, ${title}, ${category}, ${genre}, ${director}, ${year}, ${description}, ${month})
       `;
+
+  // use revalidatePath here?
+  redirect("/dashboard");
 };
 
 export const editEntry = async () => {};

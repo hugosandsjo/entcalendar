@@ -1,0 +1,4 @@
+input[type="radio"]:checked + .radio-label {
+  background-color: black;
+  color: white;
+}

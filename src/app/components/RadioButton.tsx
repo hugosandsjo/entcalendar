@@ -1,3 +1,5 @@
+import "../RadioButton.css";
+
 type RadioButtonProps = {
   category: string;
 };
@@ -5,10 +7,18 @@ type RadioButtonProps = {
 function RadioButton({ category }: RadioButtonProps) {
   return (
     <>
-      <div>
-        <input type="radio" id={category} name="category" value={category} />
-        <label htmlFor={category}>{category}</label>
-      </div>
+      <label className="text-2xl rounded cursor-pointer " htmlFor={category}>
+        <input
+          type="radio"
+          id={category}
+          name="category"
+          value={category}
+          className="hidden"
+        />
+        <span className="radio-label py-2 px-4 border border-black rounded-3xl">
+          {category}
+        </span>
+      </label>
     </>
   );
 }

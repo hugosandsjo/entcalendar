@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import FooterButton from "./FooterButton";
 
 function Footer() {
   return (
@@ -7,13 +8,13 @@ function Footer() {
       <div className="flex justify-evenly p-12">
         <Link href="/">
           {" "}
-          <p>Home</p>
+          <FooterButton text="Home" />
         </Link>
         <Link href="/about">
-          <p>About</p>
+          <FooterButton text="About" />
         </Link>
         <Link href="/contact">
-          <p>Contact</p>
+          <FooterButton text="Contact" />
         </Link>
       </div>
     </header>

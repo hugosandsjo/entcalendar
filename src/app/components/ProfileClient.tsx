@@ -10,15 +10,22 @@ export default function ProfileClient() {
 
   return (
     user && (
-      <div>
+      <div className="flex gap-4 items-center">
         <img
-          className="h-40 w-40"
+          className="h-20 w-20 rounded-full"
           src={user.picture ?? ""}
           alt={user.name ?? ""}
         />
-        <h2>{`Welcome ${user.name}!`}</h2>
-        <p>{user.email}</p>
-        <p>{user.sub}</p>
+        <div>
+          <h2>{`Welcome ${user.name}!`}</h2>
+          <div className="flex gap-1">
+            Email: <p>{user.email}</p>
+          </div>
+          <div className="flex gap-1">
+            Auth:
+            <p>{user.sub}</p>
+          </div>
+        </div>
       </div>
     )
   );
