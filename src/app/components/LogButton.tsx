@@ -13,11 +13,11 @@ function LogButton() {
   return (
     <>
       {user ? (
-        <button className="border p-2 hover:bg-slate-400">
+        <button className="p-2 hover:bg-slate-400">
           <a href="/api/auth/logout">Logout</a>
         </button>
       ) : (
-        <button className="border p-2 hover:bg-slate-400">
+        <button className="p-2 hover:bg-slate-400">
           <a href="/api/auth/login">Login</a>
         </button>
       )}

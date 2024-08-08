@@ -2,7 +2,6 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import LogButton from "./LogButton";
-import { useUser } from "@auth0/nextjs-auth0/client";
 
 function Header() {
   return (
