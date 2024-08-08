@@ -3,15 +3,16 @@
 import React from "react";
 import Entry, { EntryProps } from "./Entry";
 import { useEffect, useState } from "react";
-import MonthHeading from "../components/MonthHeading";
+import Link from "next/link";
 
 import { useUser } from "@auth0/nextjs-auth0/client";
 
 type EntryContainerProps = {
   month: string;
+  title: string;
 };
 
-function EntryContainer({ month }: EntryContainerProps) {
+function EntryContainer({ month, title }: EntryContainerProps) {
   const { user, isLoading } = useUser();
   const [entries, setEntries] = useState<EntryProps[]>([]);
 

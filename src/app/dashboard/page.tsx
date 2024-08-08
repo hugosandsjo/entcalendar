@@ -1,7 +1,7 @@
-import EntryContainer from "../components/EntryContainer";
-import Main from "../components/Main";
-import ProfileClient from "../components/ProfileClient";
-import MonthHeading from "../components/MonthHeading";
+import EntryContainer from "@/app/components/EntryContainer";
+import Main from "@/app/components/Main";
+import ProfileClient from "@/app/components/ProfileClient";
+import MonthHeading from "@/app/components/MonthHeading";
 
 const months = [
   "January",
