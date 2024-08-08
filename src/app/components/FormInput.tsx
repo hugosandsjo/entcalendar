@@ -8,7 +8,7 @@ function FormInput({ title, name }: FormInputProps) {
     <>
       <label htmlFor={title}>{title}</label>
       <input
-        className="p-3 border border-black rounded-md"
+        className="p-3 border border-black rounded-md max-w-2xl"
         type="text"
         id={name}
         name={name}

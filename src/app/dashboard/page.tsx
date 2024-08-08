@@ -16,6 +16,8 @@ export default function Dashboard() {
         <EntryContainer month="july" />
         <Month text="September"></Month>
         <EntryContainer month="september" />
+        <Month text="September"></Month>
+        <EntryContainer month="august" />
       </Main>
     </>
   );
