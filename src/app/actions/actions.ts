@@ -2,7 +2,6 @@
 
 import { sql } from "@vercel/postgres";
 import { redirect } from "next/navigation";
-import { revalidatePath } from "next/cache";
 
 export const addEntry = async (formData: FormData) => {
   const user_sub = formData.get("user_sub") as string | null;
@@ -70,6 +69,17 @@ export const addEntry = async (formData: FormData) => {
 };
 
 export const UpdateEntry = async (id: number) => {};
+
+// export const getEntry = async (id: number) => {
+//   await sql`SELECT * from entries where id = ${id}`;
+// };
+
+export const getEntry = async (id: number) => {
+  const result = await sql`SELECT * FROM entries WHERE id = ${id}`;
+  const entries = result.rows;
+  console.log("getEntry function:", entries);
+  return entries[0];
+};
 
 export const deleteEntry = async (id: number) => {
   await sql`DELETE FROM entries WHERE id = ${id}`;
