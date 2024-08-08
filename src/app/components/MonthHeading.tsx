@@ -7,7 +7,7 @@ type MonthProps = {
 export default function Month({ text }: MonthProps) {
   return (
     <>
-      <h1 className="text-6xl">{text}</h1>
+      <h1 className="text-6xl mb-8">{text}</h1>
     </>
   );
 }
