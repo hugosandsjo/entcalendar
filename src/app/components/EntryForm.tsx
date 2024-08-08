@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import RadioButton from "../components/RadioButton";
 import { addEntry } from "../actions/actions";
@@ -9,6 +9,7 @@ import FormInput from "../components/FormInput";
 function EntryForm() {
   const { user, isLoading } = useUser();
   const formRef = useRef<HTMLFormElement>(null);
+  const [category, setCategory] = useState<string>("Book");
 
   useEffect(() => {
     if (user && formRef.current) {
@@ -27,6 +28,10 @@ function EntryForm() {
   if (!user) {
     return <div>Please log in to submit an entry.</div>;
   }
+
+  const handleCategoryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCategory(e.target.value);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -47,7 +52,11 @@ function EntryForm() {
         >
           <h1 className="text-5xl mb-4">New Entry</h1>
           <label htmlFor="options">Month</label>
-          <select className="p-4 border border-black" id="month" name="month">
+          <select
+            className="p-4 border border-black max-w-2xl"
+            id="month"
+            name="month"
+          >
             <option value="january">January</option>
             <option value="february">February</option>
             <option value="march">March</option>
@@ -63,16 +72,33 @@ function EntryForm() {
           </select>
           <label htmlFor="category">Category</label>
           <div className="flex gap-2 my-2">
-            <RadioButton category="Book" />
-            <RadioButton category="Movie" />
-            <RadioButton category="Series" />
-            <RadioButton category="Game" />
+            {["Book", "Movie", "Series", "Game"].map((cat) => (
+              <RadioButton
+                key={cat}
+                category={cat}
+                onChange={handleCategoryChange}
+                checked={category === cat}
+              />
+            ))}
           </div>
           <input type="hidden" id="user_sub" name="user_sub" required></input>
           <FormInput title="Title" name="title" />
           <FormInput title="Genre" name="genre" />
-          <FormInput title="Director" name="director" />
           <FormInput title="Year" name="year" />
+
+          {category === "Book" && <FormInput title="Author" name="author" />}
+          {(category === "Movie" || category === "Series") && (
+            <>
+              <FormInput title="Director" name="director" />
+              <FormInput title="Writer" name="writer" />
+            </>
+          )}
+          {category === "Game" && (
+            <>
+              <FormInput title="Publisher" name="publisher" />
+              <FormInput title="Developer" name="developer" />
+            </>
+          )}
           <FormInput title="Description" name="description" />
           <button
             type="submit"
