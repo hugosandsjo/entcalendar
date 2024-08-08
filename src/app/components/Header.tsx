@@ -15,7 +15,7 @@ function Header() {
       </Link>
       <LogButton />
 
-      <Link href="/new">
+      <Link href="/dashboard/create">
         <Image
           className="hover:opacity-30"
           src="/plus.svg"
