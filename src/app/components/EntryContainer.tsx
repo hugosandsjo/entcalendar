@@ -9,10 +9,9 @@ import { useUser } from "@auth0/nextjs-auth0/client";
 
 type EntryContainerProps = {
   month: string;
-  title: string;
 };
 
-function EntryContainer({ month, title }: EntryContainerProps) {
+function EntryContainer({ month }: EntryContainerProps) {
   const { user, isLoading } = useUser();
   const [entries, setEntries] = useState<EntryProps[]>([]);
 
