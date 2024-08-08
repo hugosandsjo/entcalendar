@@ -5,7 +5,6 @@ export default function New() {
   return (
     <>
       <EntryForm />
-      <EntryContainer />
     </>
   );
 }
