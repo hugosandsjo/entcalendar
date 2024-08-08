@@ -6,8 +6,8 @@ type InfoTagProps = {
 
 function InfoTag({ text }: InfoTagProps) {
   return (
-    <div className="">
-      <h3 className="text-4l">{text}</h3>
+    <div>
+      <h3 className="text-xl">{text}</h3>
     </div>
   );
 }
