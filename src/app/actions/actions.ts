@@ -9,20 +9,44 @@ export const addEntry = async (formData: FormData) => {
   const title = formData.get("title") as string | null;
   const category = formData.get("category") as string | null;
   const genre = formData.get("genre") as string | null;
-  const director = formData.get("director") as string | null;
   const year = formData.get("year") as string | null;
   const description = formData.get("description") as string | null;
   const month = formData.get("month") as string | null;
+
+  let author = null;
+  let director = null;
+  let writer = null;
+  let publisher = null;
+  let developer = null;
+
+  switch (category) {
+    case "Book":
+      author = formData.get("author") as string | null;
+      break;
+    case "Movie":
+    case "Series":
+      director = formData.get("director") as string | null;
+      writer = formData.get("writer") as string | null;
+      break;
+    case "Game":
+      publisher = formData.get("publisher") as string | null;
+      developer = formData.get("developer") as string | null;
+      break;
+  }
 
   console.log("Submitted form data:", {
     user_sub,
     title,
     category,
     genre,
-    director,
     year,
     description,
     month,
+    author,
+    director,
+    writer,
+    publisher,
+    developer,
   });
 
   if (
@@ -30,7 +54,6 @@ export const addEntry = async (formData: FormData) => {
     !title ||
     !category ||
     !genre ||
-    !director ||
     !year ||
     !description ||
     !month
@@ -39,11 +62,15 @@ export const addEntry = async (formData: FormData) => {
   }
 
   await sql`
-        INSERT INTO entries (user_sub, title, category, genre, director, year, description, month)
-        VALUES (${user_sub}, ${title}, ${category}, ${genre}, ${director}, ${year}, ${description}, ${month})
-      `;
+    INSERT INTO entries (
+      user_sub, title, category, genre, year, description, month,
+      author, director, writer, publisher, developer
+    ) VALUES (
+      ${user_sub}, ${title}, ${category}, ${genre}, ${year}, ${description}, ${month},
+      ${author}, ${director}, ${writer}, ${publisher}, ${developer}
+    )
+  `;
 
-  // use revalidatePath here?
   redirect("/dashboard");
 };
 
