@@ -69,7 +69,7 @@ export const addEntry = async (formData: FormData) => {
   redirect("/dashboard");
 };
 
-export const editEntry = async () => {};
+export const UpdateEntry = async (id: number) => {};
 
 export const deleteEntry = async (id: number) => {
   await sql`DELETE FROM entries WHERE id = ${id}`;
