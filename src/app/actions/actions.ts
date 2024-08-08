@@ -19,19 +19,14 @@ export const addEntry = async (formData: FormData) => {
   let publisher = null;
   let developer = null;
 
-  switch (category) {
-    case "Book":
-      author = formData.get("author") as string | null;
-      break;
-    case "Movie":
-    case "Series":
-      director = formData.get("director") as string | null;
-      writer = formData.get("writer") as string | null;
-      break;
-    case "Game":
-      publisher = formData.get("publisher") as string | null;
-      developer = formData.get("developer") as string | null;
-      break;
+  if (category === "Book") {
+    author = formData.get("author") as string | null;
+  } else if (category === "Movie" || category === "Series") {
+    director = formData.get("director") as string | null;
+    writer = formData.get("writer") as string | null;
+  } else if (category === "Game") {
+    publisher = formData.get("publisher") as string | null;
+    developer = formData.get("developer") as string | null;
   }
 
   console.log("Submitted form data:", {
