@@ -5,6 +5,7 @@ import { useUser } from "@auth0/nextjs-auth0/client";
 import RadioButton from "../components/RadioButton";
 import { addEntry } from "../actions/actions";
 import FormInput from "../components/FormInput";
+import FormInputLarge from "./FormInputLarge";
 
 function EntryForm() {
   const { user, isLoading } = useUser();
@@ -47,16 +48,12 @@ function EntryForm() {
       <section className="flex w-screen justify-center mb-12">
         <form
           ref={formRef}
-          className="flex flex-col w-screen p-8  border gap-2"
+          className="flex flex-col p-8 gap-y-2"
           onSubmit={handleSubmit}
         >
           <h1 className="text-5xl mb-4">New Entry</h1>
           <label htmlFor="options">Month</label>
-          <select
-            className="p-4 border border-black max-w-2xl"
-            id="month"
-            name="month"
-          >
+          <select className="p-4 border border-black" id="month" name="month">
             <option value="january">January</option>
             <option value="february">February</option>
             <option value="march">March</option>
@@ -99,10 +96,10 @@ function EntryForm() {
               <FormInput title="Developer" name="developer" />
             </>
           )}
-          <FormInput title="Description" name="description" />
+          <FormInputLarge title="Description" name="description" />
           <button
             type="submit"
-            className="mt-4 p-4 border border-black rounded-md bg-black text-white hover:opacity-60"
+            className="mt-4 p-4 border border-black rounded-md bg-black text-white hover:opacity-60 max-w-2xl"
           >
             Submit
           </button>
