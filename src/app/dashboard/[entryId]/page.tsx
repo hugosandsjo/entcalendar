@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { getEntry } from "@/app/actions/actions";
+import Link from "next/link";
 
 export default function UpdateEntryPage({
   params,
@@ -20,21 +21,26 @@ export default function UpdateEntryPage({
   }, []);
 
   return (
-    <>
-      <h1>{params.entryId}</h1>
-      {entry ? (
-        <div>
-          <h1>{entry.title}</h1>
-          <p>{entry.category}</p>
-          <p>{entry.description}</p>
-          <p>{entry.author}</p>
-          <p>{entry.director}</p>
-        </div>
-      ) : (
-        <p>Loading...</p> // Display a loading state until data is fetched
-      )}
-
-      {/* <p>{entry.year}</p> */}
-    </>
+    <section className="flex justify-center py-14">
+      <div className="w-8/12 px-14 pt-12 pb-16 flex flex-col gap-4 border border-black h-96">
+        <Link href="/dashboard">
+          {" "}
+          <div>Back</div>
+        </Link>
+        {entry ? (
+          <div className="flex flex-col gap-1">
+            <h1 className="text-7xl mb-2">{entry.title}</h1>
+            <div className="flex gap-x-2 mb-2">
+              <h2 className="text-3xl">{entry.category}</h2>
+              <h2 className="text-3xl">{entry.author}</h2>
+              <h2 className="text-3xl">{entry.director}</h2>
+            </div>
+            <p className="text-lg">{entry.description}</p>
+          </div>
+        ) : (
+          <p>Loading...</p>
+        )}
+      </div>
+    </section>
   );
 }
