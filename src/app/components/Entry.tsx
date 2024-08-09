@@ -44,7 +44,7 @@ function Entry({
   onDelete,
 }: EntryProps) {
   return (
-    <div className="min-w-96 max-w-lg py-9 px-12 flex flex-col gap-4 justify-between border border-black rounded-3xl ">
+    <div className="min-w-96 max-w-lg py-9 px-12 flex flex-col gap-4 justify-between border border-black">
       <div>
         <h1 className="text-4xl mb-3">{title}</h1>
 
@@ -66,19 +66,23 @@ function Entry({
       <div>
         <p>{description}</p>
       </div>
-      <div className="flex gap-2">
-        <button className="border hover:bg-sky-300 py-2 px-4 rounded-xl">
-          Edit
-        </button>
-        <button
-          className="border hover:bg-red-500 py-2 px-4 rounded-xl"
-          onClick={() => handleDeleteClick(id, onDelete)}
-        >
-          Delete
-        </button>
-        <Link href={`dashboard/${id}`}>
-          <h1>Go to entry</h1>
-        </Link>
+      <div className="flex gap-2 justify-between">
+        <div>
+          <button className="border hover:bg-sky-300 py-2 px-4 rounded-xl">
+            Edit
+          </button>
+          <button
+            className="border hover:bg-red-500 py-2 px-4 rounded-xl"
+            onClick={() => handleDeleteClick(id, onDelete)}
+          >
+            Delete
+          </button>
+        </div>
+        <div>
+          <Link href={`dashboard/${id}`}>
+            <h1>Go to entry</h1>
+          </Link>
+        </div>
       </div>
     </div>
   );
