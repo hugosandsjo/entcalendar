@@ -68,11 +68,19 @@ export const addEntry = async (formData: FormData) => {
   redirect("/dashboard");
 };
 
-export const UpdateEntry = async (id: number) => {};
+// export const UpdateEntry = async (id: number) => {};
 
-// export const getEntry = async (id: number) => {
-//   await sql`SELECT * from entries where id = ${id}`;
+// export const getEntries = async (user: string | null | undefined) => {
+//   await sql`SELECT * from entries where user_sub = '${user}'`;
 // };
+
+export const getEntries = async (user: string | null | undefined) => {
+  if (!user) {
+    throw new Error("User identifier is required");
+  }
+  const result = await sql`SELECT * FROM entries WHERE user_sub = ${user}`;
+  return result.rows; // Assuming you want to return the rows
+};
 
 export const getEntry = async (id: number) => {
   const result = await sql`SELECT * FROM entries WHERE id = ${id}`;

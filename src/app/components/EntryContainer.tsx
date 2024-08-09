@@ -3,12 +3,12 @@
 import React from "react";
 import Entry, { EntryProps } from "./Entry";
 import { useEffect, useState } from "react";
-import Link from "next/link";
-
+import { getEntries } from "@/app/actions/actions";
 import { useUser } from "@auth0/nextjs-auth0/client";
 
 type EntryContainerProps = {
   month: string;
+  entries: EntryProps[];
 };
 
 function EntryContainer({ month }: EntryContainerProps) {
@@ -16,18 +16,33 @@ function EntryContainer({ month }: EntryContainerProps) {
   const [entries, setEntries] = useState<EntryProps[]>([]);
 
   useEffect(() => {
-    const getEntries = async () => {
+    console.log("User changed:", user);
+    (async () => {
       if (user) {
         try {
-          const response = await fetch(`/dashboard/api?userSub=${user.sub}`);
-          const data = await response.json();
-          setEntries(data.rows);
+          const data = await getEntries(user.sub);
+          const entries: EntryProps[] = data.map((row) => ({
+            id: row.id,
+            title: row.title,
+            category: row.category,
+            genre: row.genre,
+            year: row.year,
+            description: row.description,
+            month: row.month,
+            author: row.author,
+            director: row.director,
+            writer: row.writer,
+            publisher: row.publisher,
+            developer: row.developer,
+            onDelete: () => {},
+          }));
+          console.log("Data useEffect", data);
+          setEntries(entries);
         } catch (error) {
           console.error("Error fetching entries:", error);
         }
       }
-    };
-    getEntries();
+    })();
   }, [user]);
 
   const handleDelete = (id: number) => {

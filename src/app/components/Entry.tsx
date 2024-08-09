@@ -11,7 +11,7 @@ export type EntryProps = {
   genre: string;
   year: number;
   description: string;
-  month: string;
+  month?: string;
   author?: string;
   director?: string;
   writer?: string;
