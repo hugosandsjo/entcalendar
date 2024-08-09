@@ -2,6 +2,9 @@
 
 import { sql } from "@vercel/postgres";
 import { redirect } from "next/navigation";
+import { cache } from "react";
+import { revalidatePath } from "next/cache";
+import { Console } from "console";
 
 export const addEntry = async (formData: FormData) => {
   const user_sub = formData.get("user_sub") as string | null;
@@ -64,15 +67,32 @@ export const addEntry = async (formData: FormData) => {
       ${author}, ${director}, ${writer}, ${publisher}, ${developer}
     )
   `;
-
+  // revalidatePath("/dashboard");
   redirect("/dashboard");
 };
 
 export const UpdateEntry = async (id: number) => {};
 
-// export const getEntry = async (id: number) => {
-//   await sql`SELECT * from entries where id = ${id}`;
-// };
+// export const getEntries = async () => {};
+
+export const getEntries = async (userSub: string | null | undefined) => {
+  try {
+    if (!userSub) {
+      throw new Error("User sub is required to fetch entries.");
+    }
+
+    const result = await sql`
+      SELECT * FROM entries WHERE user_sub = ${userSub}
+    `;
+
+    const entries = result.rows;
+    console.log("This is a test", entries);
+    return entries;
+  } catch (error) {
+    console.error("Error fetching entries:", error);
+    return { success: false, error: "Failed to fetch entries." };
+  }
+};
 
 export const getEntry = async (id: number) => {
   const result = await sql`SELECT * FROM entries WHERE id = ${id}`;
