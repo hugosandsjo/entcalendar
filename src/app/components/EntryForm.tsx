@@ -35,22 +35,13 @@ function EntryForm() {
     setCategory(e.target.value);
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (formRef.current) {
-      const formData = new FormData(formRef.current);
-      await addEntry(formData);
-      formRef.current.reset();
-    }
-  };
-
   return (
     <>
       <section className="flex w-screen justify-center mb-12">
         <form
           ref={formRef}
           className="flex flex-col p-1 gap-y-2 w-8/12"
-          onSubmit={handleSubmit}
+          action={addEntry}
         >
           <h1 className="text-5xl mb-4">New Entry</h1>
           <FormMonth />
