@@ -2,6 +2,7 @@ import EntryContainer from "@/app/components/EntryContainer";
 import Main from "@/app/components/Main";
 import ProfileClient from "@/app/components/ProfileClient";
 import MonthHeading from "@/app/components/MonthHeading";
+import { unstable_noStore as noStore } from "next/cache";
 
 const months = [
   "January",
@@ -19,6 +20,7 @@ const months = [
 ];
 
 export default function Dashboard() {
+  // noStore();
   return (
     <>
       <Main>
