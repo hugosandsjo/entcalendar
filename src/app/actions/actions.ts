@@ -64,13 +64,11 @@ export const addEntry = async (formData: FormData) => {
       ${author}, ${director}, ${writer}, ${publisher}, ${developer}
     )
   `;
-  // revalidatePath("/dashboard");
   redirect("/dashboard");
 };
 
 export const UpdateEntry = async (id: number) => {};
 
-// export const getEntries = async () => {};
 
 export const getEntries = async (userSub: string | null | undefined) => {
   try {
