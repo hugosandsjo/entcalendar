@@ -20,7 +20,8 @@ const months = [
 ];
 
 export default function Dashboard() {
-  // noStore();
+  noStore();
+
   return (
     <>
       <Main>

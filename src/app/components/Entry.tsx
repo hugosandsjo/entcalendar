@@ -48,8 +48,8 @@ function Entry({
       <div>
         <h1 className="text-4xl mb-3">{title}</h1>
 
-        <div className="flex flex-col gap-1">
-          <article className="flex gap-x-1">
+        <div className="flex flex-col gap-2">
+          <article className="flex flex-wrap gap-x-1">
             <InfoTag text={category} />
             <InfoTag text={year} />
             <InfoTag text={author} />
@@ -67,7 +67,7 @@ function Entry({
         <p>{description}</p>
       </div>
       <div className="flex gap-2 justify-between">
-        <div>
+        <div className="flex gap-x-2">
           <button className="border hover:bg-sky-300 py-2 px-4 rounded-xl">
             Edit
           </button>
@@ -78,9 +78,11 @@ function Entry({
             Delete
           </button>
         </div>
-        <div>
+        <div className="flex">
           <Link href={`dashboard/${id}`}>
-            <h1>Go to entry</h1>
+            <button className="border hover:bg-green-700 py-2 px-4 rounded-xl">
+              Go to entry
+            </button>
           </Link>
         </div>
       </div>
