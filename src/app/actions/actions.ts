@@ -2,9 +2,6 @@
 
 import { sql } from "@vercel/postgres";
 import { redirect } from "next/navigation";
-import { cache } from "react";
-import { revalidatePath } from "next/cache";
-import { Console } from "console";
 
 export const addEntry = async (formData: FormData) => {
   const user_sub = formData.get("user_sub") as string | null;
