@@ -25,7 +25,7 @@ export default function UpdateEntryPage({
       <div className="w-8/12 px-14 pt-12 pb-16 flex flex-col gap-4 border border-black h-96">
         <Link href="/dashboard">
           {" "}
-          <div>Back</div>
+          <div className="hover:opacity-35">Back</div>
         </Link>
         {entry ? (
           <div className="flex flex-col gap-1">
