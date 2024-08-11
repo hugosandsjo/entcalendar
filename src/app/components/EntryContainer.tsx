@@ -20,12 +20,10 @@ function EntryContainer({ month, entries }: EntryContainerProps) {
     setFilteredEntries(filteredEntries.filter((entry) => entry.id !== id)); // Update usage to filteredEntries
   };
 
-  const monthEntries = filteredEntries.filter((entry) => entry.month === month); // Filter entries by month
-
   return (
     <section className="relative -left-12 ">
       <div className="flex w-[calc(100%+6rem)] gap-6 overflow-x-auto first:pl-10 last:pr-10 scrollbar-hide">
-        {monthEntries.map((entry) => (
+        {filteredEntries.map((entry) => (
           <Entry
             key={entry.id}
             id={entry.id}
