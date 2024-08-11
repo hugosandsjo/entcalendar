@@ -4,7 +4,6 @@ import React from "react";
 import Entry, { EntryProps } from "./Entry";
 import { useEffect, useState } from "react";
 import { getEntries } from "@/app//actions/actions";
-import Link from "next/link";
 
 import { useUser } from "@auth0/nextjs-auth0/client";
 
@@ -15,21 +14,6 @@ type EntryContainerProps = {
 function EntryContainer({ month }: EntryContainerProps) {
   const { user, isLoading } = useUser();
   const [entries, setEntries] = useState<EntryProps[]>([]);
-
-  // useEffect(() => {
-  //   const getEntries = async () => {
-  //     if (user) {
-  //       try {
-  //         const response = await fetch(`/dashboard/api?userSub=${user.sub}`);
-  //         const data = await response.json();
-  //         setEntries(data.rows);
-  //       } catch (error) {
-  //         console.error("Error fetching entries:", error);
-  //       }
-  //     }
-  //   };
-  //   getEntries();
-  // }, [user]);
 
   useEffect(() => {
     (async () => {
