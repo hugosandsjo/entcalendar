@@ -1,49 +1,31 @@
 "use client";
 
-import React from "react";
-import Entry, { EntryProps } from "./Entry";
-import { useEffect, useState } from "react";
-import { getEntries } from "@/app//actions/actions";
-
-import { useUser } from "@auth0/nextjs-auth0/client";
+import React, { useState, useEffect } from "react";
+import Entry, { EntryProps } from "@/app/components/Entry";
 
 type EntryContainerProps = {
   month: string;
+  entries: EntryProps[];
 };
 
-function EntryContainer({ month }: EntryContainerProps) {
-  const { user, isLoading } = useUser();
-  const [entries, setEntries] = useState<EntryProps[]>([]);
+function EntryContainer({ month, entries }: EntryContainerProps) {
+  // const [entries, setEntries] = useState<EntryProps[]>([]);
+  const [filteredEntries, setFilteredEntries] = useState<EntryProps[]>(entries); // Renamed to filteredEntries
 
   useEffect(() => {
-    (async () => {
-      if (user) {
-        const data = await getEntries(user.sub);
-        console.log(user.sub);
-        console.log("Page data:", data);
-        setEntries(data as EntryProps[]);
-      }
-    })();
-  }, [user]);
+    setFilteredEntries(entries.filter((entry) => entry.month === month));
+  }, [entries, month]); // Update filteredEntries when entries or month changes
 
   const handleDelete = (id: number) => {
-    setEntries(entries.filter((entry) => entry.id !== id));
+    setFilteredEntries(filteredEntries.filter((entry) => entry.id !== id)); // Update usage to filteredEntries
   };
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (!user) {
-    return <div>Please log in to see your entries.</div>;
-  }
-
-  const filteredEntries = entries.filter((entry) => entry.month === month);
+  const monthEntries = filteredEntries.filter((entry) => entry.month === month); // Filter entries by month
 
   return (
     <section className="relative -left-12 ">
       <div className="flex w-[calc(100%+6rem)] gap-6 overflow-x-auto first:pl-10 last:pr-10 scrollbar-hide">
-        {filteredEntries.map((entry) => (
+        {monthEntries.map((entry) => (
           <Entry
             key={entry.id}
             id={entry.id}
