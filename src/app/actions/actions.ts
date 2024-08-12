@@ -69,7 +69,6 @@ export const addEntry = async (formData: FormData) => {
 
 export const UpdateEntry = async (id: number) => {};
 
-
 export const getEntries = async (userSub: string | null | undefined) => {
   try {
     if (!userSub) {
