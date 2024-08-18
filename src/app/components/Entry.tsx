@@ -9,7 +9,7 @@ export type EntryProps = {
   title: string;
   category: "Book" | "Movie" | "Series" | "Game";
   genre: string;
-  year: number;
+  year: string | number;
   description: string;
   month: string;
   author?: string;
