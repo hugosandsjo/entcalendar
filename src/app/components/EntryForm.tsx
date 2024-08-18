@@ -2,13 +2,13 @@
 
 import React, { useRef, useEffect, useState } from "react";
 import { useUser } from "@auth0/nextjs-auth0/client";
-import RadioButton from "../components/RadioButton";
-import { addEntry } from "../actions/actions";
-import FormInput from "../components/FormInput";
-import FormInputLarge from "./FormInputLarge";
-import FormMonth from "./FormMonth";
+import RadioButton from "@/app/components/RadioButton";
+import { addEntry } from "@/app/actions/actions";
+import FormInput from "@/app/components/FormInput";
+import FormInputLarge from "@/app/components/FormInputLarge";
+import FormMonth from "@/app/components/FormMonth";
 
-function EntryForm() {
+export default function EntryForm() {
   const { user, isLoading } = useUser();
   const formRef = useRef<HTMLFormElement>(null);
   const [category, setCategory] = useState<string>("Book");
@@ -89,5 +89,3 @@ function EntryForm() {
     </>
   );
 }
-
-export default EntryForm;

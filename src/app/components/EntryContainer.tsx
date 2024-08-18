@@ -9,15 +9,14 @@ type EntryContainerProps = {
 };
 
 function EntryContainer({ month, entries }: EntryContainerProps) {
-  // const [entries, setEntries] = useState<EntryProps[]>([]);
-  const [filteredEntries, setFilteredEntries] = useState<EntryProps[]>(entries); // Renamed to filteredEntries
+  const [filteredEntries, setFilteredEntries] = useState<EntryProps[]>(entries);
 
   useEffect(() => {
     setFilteredEntries(entries.filter((entry) => entry.month === month));
-  }, [entries, month]); // Update filteredEntries when entries or month changes
+  }, [entries, month]);
 
-  const handleDelete = (id: number) => {
-    setFilteredEntries(filteredEntries.filter((entry) => entry.id !== id)); // Update usage to filteredEntries
+  const updateUIAfterDelete = (id: number) => {
+    setFilteredEntries(filteredEntries.filter((entry) => entry.id !== id));
   };
 
   return (
@@ -38,7 +37,8 @@ function EntryContainer({ month, entries }: EntryContainerProps) {
             publisher={entry.publisher}
             developer={entry.developer}
             month={entry.month}
-            onDelete={handleDelete}
+            onDelete={updateUIAfterDelete}
+            onUpdate={updateUIAfterDelete}
           />
         ))}
       </div>

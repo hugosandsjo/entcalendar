@@ -14,8 +14,6 @@ export default function UpdateEntryPage({
   useEffect(() => {
     (async () => {
       const data = await getEntry(params.entryId);
-      console.log(params.entryId);
-      console.log("Page data:", data);
       setEntry(data);
     })();
   }, []);
@@ -27,6 +25,7 @@ export default function UpdateEntryPage({
           {" "}
           <div className="hover:opacity-35">Back</div>
         </Link>
+        <h1>Entry id: {params.entryId}</h1>
         {entry ? (
           <div className="flex flex-col gap-1">
             <h1 className="text-7xl mb-2">{entry.title}</h1>
@@ -40,6 +39,12 @@ export default function UpdateEntryPage({
         ) : (
           <p>Loading...</p>
         )}
+
+        <Link href={`/dashboard/${params.entryId}/edit`}>
+          <button className="border hover:bg-sky-300 py-2 px-4 rounded-xl">
+            Edit
+          </button>
+        </Link>
       </div>
     </section>
   );

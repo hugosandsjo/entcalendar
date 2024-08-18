@@ -1,6 +1,6 @@
 import React from "react";
 import InfoTag from "./InfoTag";
-import { deleteEntry } from "@/app/actions/actions";
+import { deleteEntry, updateEntry } from "@/app/actions/actions";
 import GenreTag from "./GenreTag";
 import Link from "next/link";
 
@@ -18,7 +18,10 @@ export type EntryProps = {
   publisher?: string;
   developer?: string;
   onDelete: (id: number) => void;
+  onUpdate: (id: number) => void;
 };
+
+export type EntryData = Omit<EntryProps, "onDelete" | "onUpdate">;
 
 const handleDeleteClick = async (
   id: number,
@@ -42,6 +45,7 @@ function Entry({
   publisher,
   developer,
   onDelete,
+  onUpdate,
 }: EntryProps) {
   return (
     <div className="min-w-96 max-w-lg py-9 px-12 flex flex-col gap-4 justify-between border border-black">
@@ -68,9 +72,6 @@ function Entry({
       </div>
       <div className="flex gap-2 justify-between">
         <div className="flex gap-x-2">
-          <button className="border hover:bg-sky-300 py-2 px-4 rounded-xl">
-            Edit
-          </button>
           <button
             className="border hover:bg-red-500 py-2 px-4 rounded-xl"
             onClick={() => handleDeleteClick(id, onDelete)}
