@@ -1,23 +1,21 @@
 "use client";
 
 import React, { useRef, useEffect, useState } from "react";
-import { useUser } from "@auth0/nextjs-auth0/client";
 import { updateEntry, getUpdateEntry } from "@/app/actions/actions";
 
 import RadioButton from "@/app/components/RadioButton";
 import FormInput from "@/app/components/FormInput";
 import FormInputLarge from "@/app/components/FormInputLarge";
 import FormMonth from "@/app/components/FormMonth";
-import { EntryProps, EntryData } from "@/app/components/Entry";
+import { EntryData } from "@/app/components/Entry";
 
 export default function EntryFormUpdate({ id }: { id: number }) {
-  const { user, isLoading } = useUser();
   const formRef = useRef<HTMLFormElement>(null);
   const [entry, setEntry] = useState<EntryData>({
     id: 0,
     title: "",
     genre: "",
-    year: 0,
+    year: "",
     category: "Book",
     month: "",
     author: "",
@@ -27,15 +25,16 @@ export default function EntryFormUpdate({ id }: { id: number }) {
     developer: "",
     description: "",
   });
+  const [month, setMonth] = useState<string>("");
   const [category, setCategory] = useState<string>("Book");
 
   useEffect(() => {
     (async () => {
       const data: EntryData = await getUpdateEntry(id);
       console.log(data);
-      console.log(data.year);
+      console.log(data.month);
       setEntry(data);
-      setCategory(data?.category || "Book"); // Set category based on fetched entry
+      setCategory(data?.category || "Book");
     })();
   }, [id]);
 
@@ -43,10 +42,16 @@ export default function EntryFormUpdate({ id }: { id: number }) {
     setCategory(e.target.defaultValue);
   };
 
+  const handleMonthChange = (month: string) => {
+    setMonth(month);
+  };
+
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = new FormData(formRef.current!);
+    formData.set("month", month);
+
     try {
       await updateEntry(id, formData);
     } catch (error) {
@@ -60,10 +65,10 @@ export default function EntryFormUpdate({ id }: { id: number }) {
         <form
           ref={formRef}
           className="flex flex-col p-1 gap-y-2 w-8/12"
-          onSubmit={handleFormSubmit} // Use onSubmit to handle form submission
+          onSubmit={handleFormSubmit}
         >
           <h1 className="text-5xl mb-4">Update Entry</h1>
-          <FormMonth defaultValue={entry?.month} />
+          <FormMonth defaultValue={entry?.month} onChange={handleMonthChange} />
           <label htmlFor="category">Category</label>
           <div className="flex gap-2 my-2 py-2">
             {["Book", "Movie", "Series", "Game"].map((formCategory) => (
@@ -71,17 +76,10 @@ export default function EntryFormUpdate({ id }: { id: number }) {
                 key={formCategory}
                 category={formCategory}
                 onChange={handleCategoryChange}
-                checked={category === formCategory} // Set checked based on state
+                checked={category === formCategory}
               />
             ))}
           </div>
-          <input
-            type="hidden"
-            id="user_sub"
-            name="user_sub"
-            defaultValue={user?.sub ?? ""}
-            required
-          />
           <FormInput title="Title" name="title" defaultValue={entry.title} />
           <FormInput title="Genre" name="genre" defaultValue={entry.genre} />
           <FormInput title="Year" name="year" defaultValue={entry.year} />

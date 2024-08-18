@@ -33,6 +33,7 @@ export default function UpdateEntryPage({
               <h2 className="text-3xl">{entry.category}</h2>
               <h2 className="text-3xl">{entry.author}</h2>
               <h2 className="text-3xl">{entry.director}</h2>
+              <h2 className="text-3xl">{entry.year}</h2>
             </div>
             <p className="text-lg">{entry.description}</p>
           </div>
