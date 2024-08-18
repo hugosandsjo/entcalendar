@@ -1,10 +1,10 @@
 type MonthProps = {
-  defaultValue?: string;
+  value?: string;
   onChange?: (month: string) => void;
 };
 
 export default function FormMonth({
-  defaultValue,
+  value,
   onChange,
 }: MonthProps & { onChange: (month: string) => void }) {
   return (
@@ -14,7 +14,7 @@ export default function FormMonth({
         className="p-4 border border-black"
         id="month"
         name="month"
-        defaultValue={defaultValue}
+        value={value}
         onChange={(e) => onChange(e.target.value)}
       >
         <option value="january">January</option>
