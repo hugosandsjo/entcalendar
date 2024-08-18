@@ -1,5 +1,3 @@
-// "use client";
-
 import EntryContainer from "@/app/components/EntryContainer";
 import Main from "@/app/components/Main";
 import ProfileClient from "@/app/components/ProfileClient";
