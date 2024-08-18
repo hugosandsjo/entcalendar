@@ -1,8 +1,17 @@
-function FormMonth() {
+type MonthProps = {
+  defaultValue?: string;
+};
+
+export default function FormMonth({ defaultValue }: MonthProps) {
   return (
     <>
       <label htmlFor="options">Month</label>
-      <select className="p-4 border border-black" id="month" name="month">
+      <select
+        className="p-4 border border-black"
+        id="month"
+        name="month"
+        defaultValue={defaultValue}
+      >
         <option value="january">January</option>
         <option value="february">February</option>
         <option value="march">March</option>
@@ -19,5 +28,3 @@ function FormMonth() {
     </>
   );
 }
-
-export default FormMonth;
