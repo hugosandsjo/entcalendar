@@ -34,6 +34,7 @@ export default function EntryFormUpdate({ id }: { id: number }) {
       console.log(data);
       console.log(data.month);
       setEntry(data);
+      setMonth(data?.month || ""); // Ensure the fetched month is set
       setCategory(data?.category || "Book");
     })();
   }, [id]);
@@ -43,6 +44,7 @@ export default function EntryFormUpdate({ id }: { id: number }) {
   };
 
   const handleMonthChange = (month: string) => {
+    console.log("Month", month);
     setMonth(month);
   };
 
@@ -68,7 +70,7 @@ export default function EntryFormUpdate({ id }: { id: number }) {
           onSubmit={handleFormSubmit}
         >
           <h1 className="text-5xl mb-4">Update Entry</h1>
-          <FormMonth defaultValue={entry?.month} onChange={handleMonthChange} />
+          <FormMonth value={entry.month} onChange={handleMonthChange} />
           <label htmlFor="category">Category</label>
           <div className="flex gap-2 my-2 py-2">
             {["Book", "Movie", "Series", "Game"].map((formCategory) => (
