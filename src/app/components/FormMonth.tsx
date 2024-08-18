@@ -1,8 +1,12 @@
 type MonthProps = {
   defaultValue?: string;
+  onChange?: (month: string) => void;
 };
 
-export default function FormMonth({ defaultValue }: MonthProps) {
+export default function FormMonth({
+  defaultValue,
+  onChange,
+}: MonthProps & { onChange: (month: string) => void }) {
   return (
     <>
       <label htmlFor="options">Month</label>
@@ -11,6 +15,7 @@ export default function FormMonth({ defaultValue }: MonthProps) {
         id="month"
         name="month"
         defaultValue={defaultValue}
+        onChange={(e) => onChange(e.target.value)}
       >
         <option value="january">January</option>
         <option value="february">February</option>

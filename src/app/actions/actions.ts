@@ -2,7 +2,7 @@
 
 import { sql } from "@vercel/postgres";
 import { redirect } from "next/navigation";
-import { EntryProps, EntryData } from "@/app/components/Entry";
+import { EntryData } from "@/app/components/Entry";
 
 export const addEntry = async (formData: FormData) => {
   const user_sub = formData.get("user_sub") as string | null;
@@ -97,6 +97,8 @@ export const getUpdateEntry = async (id: number): Promise<EntryData> => {
   const result = await sql`SELECT * FROM entries WHERE id = ${id}`;
   const entry = result.rows[0];
 
+  console.log("getUpdateEntry", entry);
+
   return {
     id: entry.id,
     title: entry.title,
@@ -117,7 +119,7 @@ export const updateEntry = async (id: number, formData: FormData) => {
   const title = formData.get("title") as string | null;
   const category = formData.get("category") as string | null;
   const genre = formData.get("genre") as string | null;
-  const year = formData.get("year") as string | null;
+  const year = formData.get("year") as number | null;
   const description = formData.get("description") as string | null;
   const month = formData.get("month") as string | null;
 
