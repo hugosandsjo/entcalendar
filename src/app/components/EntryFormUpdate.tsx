@@ -66,12 +66,10 @@ export default function EntryFormUpdate({ id }: { id: number }) {
       <section className="flex w-screen justify-center mb-12">
         <form
           ref={formRef}
-          className="flex flex-col p-1 gap-y-2 w-8/12"
+          className="flex flex-col p-1 gap-y-2 "
           onSubmit={handleFormSubmit}
         >
           <h1 className="text-5xl mb-4">Update Entry</h1>
-          <FormMonth value={entry.month} onChange={handleMonthChange} />
-          <label htmlFor="category">Category</label>
           <div className="flex gap-2 my-2 py-2">
             {["Book", "Movie", "Series", "Game"].map((formCategory) => (
               <RadioButton
@@ -82,51 +80,82 @@ export default function EntryFormUpdate({ id }: { id: number }) {
               />
             ))}
           </div>
-          <FormInput title="Title" name="title" defaultValue={entry.title} />
-          <FormInput title="Genre" name="genre" defaultValue={entry.genre} />
-          <FormInput title="Year" name="year" defaultValue={entry.year} />
+          <article className="flex gap-4">
+            <div className="flex flex-col">
+              <FormMonth value={entry.month} onChange={handleMonthChange} />
+            </div>
+            <div className="flex flex-col">
+              <FormInput title="Year" name="year" defaultValue={entry.year} />
+            </div>
+          </article>
+          <article className="flex gap-4">
+            <div className="flex flex-col">
+              <FormInput
+                title="Title"
+                name="title"
+                defaultValue={entry.title}
+              />
+            </div>
+            <div className="flex flex-col">
+              <FormInput
+                title="Genre"
+                name="genre"
+                defaultValue={entry.genre}
+              />
+            </div>
+          </article>
+          <article className="flex gap-4 flex-wrap">
+            {/* Conditionally render inputs based on category */}
+            {category === "Book" && (
+              <div className="flex">
+                <FormInput
+                  title="Author"
+                  name="author"
+                  defaultValue={entry.author}
+                />
+              </div>
+            )}
 
-          {/* Conditionally render inputs based on category */}
-          {category === "Book" && (
-            <FormInput
-              title="Author"
-              name="author"
-              defaultValue={entry.author}
-            />
-          )}
-          {(category === "Movie" || category === "Series") && (
-            <>
-              <FormInput
-                title="Director"
-                name="director"
-                defaultValue={entry.director}
-              />
-              <FormInput
-                title="Writer"
-                name="writer"
-                defaultValue={entry.writer}
-              />
-            </>
-          )}
-          {category === "Game" && (
-            <>
-              <FormInput
-                title="Publisher"
-                name="publisher"
-                defaultValue={entry.publisher}
-              />
-              <FormInput
-                title="Developer"
-                name="developer"
-                defaultValue={entry.developer}
-              />
-            </>
-          )}
+            {(category === "Movie" || category === "Series") && (
+              <>
+                <div className="flex flex-col">
+                  <FormInput
+                    title="Director"
+                    name="director"
+                    defaultValue={entry.director}
+                  />
+                </div>
+                <div className="flex flex-col">
+                  <FormInput
+                    title="Writer"
+                    name="writer"
+                    defaultValue={entry.writer}
+                  />
+                </div>
+              </>
+            )}
+
+            {category === "Game" && (
+              <>
+                <FormInput
+                  title="Publisher"
+                  name="publisher"
+                  defaultValue={entry.publisher}
+                />
+                <FormInput
+                  title="Developer"
+                  name="developer"
+                  defaultValue={entry.developer}
+                />
+              </>
+            )}
+          </article>
           <FormInputLarge
             title="Description"
             name="description"
             defaultValue={entry?.description}
           />
+
           <button
             type="submit"
             className="mt-4 p-4 border border-black rounded-md bg-black text-white hover:opacity-60"
