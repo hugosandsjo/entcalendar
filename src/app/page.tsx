@@ -4,7 +4,9 @@ export default function Home() {
   return (
     <>
       <Main>
-        <h1 className="text-9xl">This is ENTcalendar</h1>
+        <div>
+          <h1 className="text-7xl leading-tight">This is ENT-calendar</h1>
+        </div>
       </Main>
     </>
   );
