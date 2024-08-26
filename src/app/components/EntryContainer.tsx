@@ -37,6 +37,7 @@ function EntryContainer({ month, entries }: EntryContainerProps) {
             publisher={entry.publisher}
             developer={entry.developer}
             month={entry.month}
+            rating={entry.rating}
             onDelete={updateUIAfterDelete}
             onUpdate={updateUIAfterDelete}
           />
