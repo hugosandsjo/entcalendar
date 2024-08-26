@@ -16,7 +16,7 @@ export default function EntryFormUpdate({ id }: { id: number }) {
     id: 0,
     title: "",
     genre: "",
-    year: "",
+    year: 0,
     category: "Book",
     month: "",
     author: "",
@@ -25,6 +25,7 @@ export default function EntryFormUpdate({ id }: { id: number }) {
     publisher: "",
     developer: "",
     description: "",
+    rating: 0,
   });
   const [month, setMonth] = useState<string>("");
   const [category, setCategory] = useState<string>("Book");
