@@ -12,6 +12,7 @@ export default function EntryForm() {
   const { user, isLoading } = useUser();
   const formRef = useRef<HTMLFormElement>(null);
   const [category, setCategory] = useState<string>("Book");
+  const [month, setMonth] = useState<string>("");
 
   useEffect(() => {
     if (user && formRef.current) {
@@ -35,6 +36,11 @@ export default function EntryForm() {
     setCategory(e.target.value);
   };
 
+  const handleMonthChange = (month: string) => {
+    console.log("Month", month);
+    setMonth(month);
+  };
+
   return (
     <>
       <section className="flex w-screen justify-center mb-12">
@@ -44,7 +50,7 @@ export default function EntryForm() {
           action={addEntry}
         >
           <h1 className="text-5xl mb-4">New Entry</h1>
-          <FormMonth />
+          <FormMonth onChange={handleMonthChange} />
           <label htmlFor="category">Category</label>
           <div className="flex gap-2 my-2 py-2">
             {["Book", "Movie", "Series", "Game"].map((cat) => (

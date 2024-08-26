@@ -17,13 +17,13 @@ export default function ProfileClient() {
           alt={user.name ?? ""}
         />
         <div>
-          <h2>{`Welcome ${user.name}!`}</h2>
-          <div className="flex gap-1">
+          <h2 className="text-xs">{`Welcome ${user.name}!`}</h2>
+          <div className="flex gap-1 text-xs">
             Email: <p>{user.email}</p>
           </div>
-          <div className="flex gap-1">
+          <div className="flex gap-1 text-xs">
             Auth:
-            <p>{user.sub}</p>
+            <p className="text-xs">{user.sub}</p>
           </div>
         </div>
       </div>

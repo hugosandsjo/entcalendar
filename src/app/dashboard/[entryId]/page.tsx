@@ -20,7 +20,7 @@ export default function UpdateEntryPage({
 
   return (
     <section className="flex justify-center py-14">
-      <div className="w-8/12 px-14 pt-12 pb-16 flex flex-col gap-4 border border-black h-96">
+      <div className="w-10/12 px-10 py-12 flex flex-col gap-4 border border-black">
         <Link href="/dashboard">
           {" "}
           <div className="hover:opacity-35">Back</div>
@@ -28,12 +28,13 @@ export default function UpdateEntryPage({
         <h1>Entry id: {params.entryId}</h1>
         {entry ? (
           <div className="flex flex-col gap-1">
-            <h1 className="text-7xl mb-2">{entry.title}</h1>
-            <div className="flex gap-x-2 mb-2">
-              <h2 className="text-3xl">{entry.category}</h2>
-              <h2 className="text-3xl">{entry.author}</h2>
-              <h2 className="text-3xl">{entry.director}</h2>
-              <h2 className="text-3xl">{entry.year}</h2>
+            <h1 className="text-3xl mb-2 leading-tight">{entry.title}</h1>
+            <div className="flex gap-x-2 mb-2 text-1xl flex-wrap gap-y-2">
+              {" "}
+              <h2 className="border rounded-3xl py-1 px-2">{entry.category}</h2>
+              <h2 className="border rounded-3xl py-1 px-2">{entry.author}</h2>
+              <h2 className="border rounded-3xl py-1 px-2">{entry.director}</h2>
+              <h2 className="border rounded-3xl py-1 px-2">{entry.year}</h2>
             </div>
             <p className="text-lg">{entry.description}</p>
           </div>

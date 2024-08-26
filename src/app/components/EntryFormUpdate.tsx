@@ -63,7 +63,7 @@ export default function EntryFormUpdate({ id }: { id: number }) {
 
   return (
     <>
-      <section className="flex w-screen justify-center mb-12">
+      <section className="flex w-screen justify-center mb-12 p-8">
         <form
           ref={formRef}
           className="flex flex-col p-1 gap-y-2 "
@@ -80,6 +80,9 @@ export default function EntryFormUpdate({ id }: { id: number }) {
               />
             ))}
           </div>
+          <div className="flex flex-col">
+            <FormInput title="Title" name="title" defaultValue={entry.title} />
+          </div>
           <article className="flex gap-4">
             <div className="flex flex-col">
               <FormMonth value={entry.month} onChange={handleMonthChange} />
@@ -91,13 +94,6 @@ export default function EntryFormUpdate({ id }: { id: number }) {
           <article className="flex gap-4">
             <div className="flex flex-col">
               <FormInput
-                title="Title"
-                name="title"
-                defaultValue={entry.title}
-              />
-            </div>
-            <div className="flex flex-col">
-              <FormInput
                 title="Genre"
                 name="genre"
                 defaultValue={entry.genre}
@@ -107,7 +103,7 @@ export default function EntryFormUpdate({ id }: { id: number }) {
           <article className="flex gap-4 flex-wrap">
             {/* Conditionally render inputs based on category */}
             {category === "Book" && (
-              <div className="flex">
+              <div className="flex flex-col">
                 <FormInput
                   title="Author"
                   name="author"
@@ -137,16 +133,20 @@ export default function EntryFormUpdate({ id }: { id: number }) {
 
             {category === "Game" && (
               <>
-                <FormInput
-                  title="Publisher"
-                  name="publisher"
-                  defaultValue={entry.publisher}
-                />
-                <FormInput
-                  title="Developer"
-                  name="developer"
-                  defaultValue={entry.developer}
-                />
+                <div className="flex flex-col">
+                  <FormInput
+                    title="Publisher"
+                    name="publisher"
+                    defaultValue={entry.publisher}
+                  />
+                </div>
+                <div className="flex flex-col">
+                  <FormInput
+                    title="Developer"
+                    name="developer"
+                    defaultValue={entry.developer}
+                  />
+                </div>
               </>
             )}
           </article>
