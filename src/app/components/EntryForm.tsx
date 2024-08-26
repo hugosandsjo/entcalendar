@@ -1,12 +1,14 @@
 "use client";
 
 import React, { useRef, useEffect, useState } from "react";
+
 import { useUser } from "@auth0/nextjs-auth0/client";
 import RadioButton from "@/app/components/RadioButton";
 import { addEntry } from "@/app/actions/actions";
 import FormInput from "@/app/components/FormInput";
 import FormInputLarge from "@/app/components/FormInputLarge";
 import FormMonth from "@/app/components/FormMonth";
+import FormStar from "@/app/components/FormStar";
 
 export default function EntryForm() {
   const { user, isLoading } = useUser();
@@ -64,9 +66,7 @@ export default function EntryForm() {
           </div>
           <input type="hidden" id="user_sub" name="user_sub" required></input>
           <FormInput title="Title" name="title" />
-
           <FormInput title="Genre" name="genre" />
-
           <FormInput title="Year" name="year" />
 
           {/* Some conditional input fields depending on the category */}
@@ -83,6 +83,7 @@ export default function EntryForm() {
               <FormInput title="Developer" name="developer" />
             </>
           )}
+          <FormStar />
           <FormInputLarge title="Description" name="description" />
           <button
             type="submit"
