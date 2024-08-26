@@ -25,7 +25,7 @@ export default function UpdateEntryPage({
           {" "}
           <div className="hover:opacity-35">Back</div>
         </Link>
-        <h1>Entry id: {params.entryId}</h1>
+        {/* <h1>Entry id: {params.entryId}</h1> */}
         {entry ? (
           <div className="flex flex-col gap-1">
             <h1 className="text-3xl mb-2 leading-tight">{entry.title}</h1>
