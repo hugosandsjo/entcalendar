@@ -3,13 +3,14 @@ import InfoTag from "./InfoTag";
 import { deleteEntry, updateEntry } from "@/app/actions/actions";
 import GenreTag from "./GenreTag";
 import Link from "next/link";
+import RatingTag from "@/app/components/RatingTag";
 
 export type EntryProps = {
   id: number;
   title: string;
   category: "Book" | "Movie" | "Series" | "Game";
   genre: string;
-  year: string | number;
+  year: number;
   description: string;
   month: string;
   author?: string;
@@ -17,6 +18,7 @@ export type EntryProps = {
   writer?: string;
   publisher?: string;
   developer?: string;
+  rating?: number;
   onDelete: (id: number) => void;
   onUpdate: (id: number) => void;
 };
@@ -44,6 +46,7 @@ function Entry({
   writer,
   publisher,
   developer,
+  rating,
   onDelete,
   onUpdate,
 }: EntryProps) {
@@ -61,6 +64,7 @@ function Entry({
             <InfoTag text={writer} />
             <InfoTag text={developer} />
             <InfoTag text={publisher} />
+            <RatingTag rating={rating} />
           </article>
           <article className="flex">
             <GenreTag text={genre} />

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { getEntry } from "@/app/actions/actions";
 import Link from "next/link";
+import RatingTag from "@/app/components/RatingTag";
 
 export default function UpdateEntryPage({
   params,
@@ -32,11 +33,14 @@ export default function UpdateEntryPage({
             <div className="flex gap-x-2 mb-2 text-1xl flex-wrap gap-y-2">
               {" "}
               <h2 className="border rounded-3xl py-1 px-2">{entry.category}</h2>
-              <h2 className="border rounded-3xl py-1 px-2">{entry.author}</h2>
+              {entry.author ? (
+                <h2 className="border rounded-3xl py-1 px-2">{entry.author}</h2>
+              ) : null}
               <h2 className="border rounded-3xl py-1 px-2">{entry.director}</h2>
               <h2 className="border rounded-3xl py-1 px-2">{entry.year}</h2>
             </div>
             <p className="text-lg">{entry.description}</p>
+            <RatingTag rating={entry.rating} />
           </div>
         ) : (
           <p>Loading...</p>
