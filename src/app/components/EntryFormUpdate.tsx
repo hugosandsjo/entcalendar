@@ -8,6 +8,7 @@ import FormInput from "@/app/components/FormInput";
 import FormInputLarge from "@/app/components/FormInputLarge";
 import FormMonth from "@/app/components/FormMonth";
 import { EntryData } from "@/app/components/Entry";
+import FormStar from "@/app/components/FormStar";
 
 export default function EntryFormUpdate({ id }: { id: number }) {
   const formRef = useRef<HTMLFormElement>(null);
@@ -150,6 +151,7 @@ export default function EntryFormUpdate({ id }: { id: number }) {
               </>
             )}
           </article>
+          <FormStar />
           <FormInputLarge
             title="Description"
             name="description"
