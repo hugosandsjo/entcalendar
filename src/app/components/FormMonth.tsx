@@ -11,7 +11,7 @@ export default function FormMonth({
     <>
       <label htmlFor="options">Month</label>
       <select
-        className="p-4 border border-black"
+        className="py-3.5 px-2 border border-black rounded-md"
         id="month"
         name="month"
         value={value}
