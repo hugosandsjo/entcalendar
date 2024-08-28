@@ -1,3 +1,5 @@
+ENTcalendar is a hobby-project made from the idea to create a diary for TV-shows, games or movies youve consumed in recent times.
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
