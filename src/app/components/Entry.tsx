@@ -10,7 +10,7 @@ export type EntryProps = {
   title: string;
   category: "Book" | "Movie" | "Series" | "Game";
   genre: string;
-  year: number;
+  year: number | string;
   description: string;
   month: string;
   author?: string;
@@ -18,7 +18,7 @@ export type EntryProps = {
   writer?: string;
   publisher?: string;
   developer?: string;
-  rating?: number;
+  rating?: number | undefined;
   onDelete: (id: number) => void;
   onUpdate: (id: number) => void;
 };

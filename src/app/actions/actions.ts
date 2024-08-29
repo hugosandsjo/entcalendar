@@ -9,9 +9,10 @@ export const addEntry = async (formData: FormData) => {
   const title = formData.get("title") as string | null;
   const category = formData.get("category") as string | null;
   const genre = formData.get("genre") as string | null;
-  const year = formData.get("year") as string | null;
+  const year = formData.get("year") as number | null;
   const description = formData.get("description") as string | null;
   const month = formData.get("month") as string | null;
+  const rating = formData.get("rating") as number | null;
 
   let author = null;
   let director = null;
@@ -42,6 +43,7 @@ export const addEntry = async (formData: FormData) => {
     writer,
     publisher,
     developer,
+    rating,
   });
 
   if (
@@ -59,10 +61,10 @@ export const addEntry = async (formData: FormData) => {
   await sql`
     INSERT INTO entries (
       user_sub, title, category, genre, year, description, month,
-      author, director, writer, publisher, developer
+      author, director, writer, publisher, developer, rating
     ) VALUES (
       ${user_sub}, ${title}, ${category}, ${genre}, ${year}, ${description}, ${month},
-      ${author}, ${director}, ${writer}, ${publisher}, ${developer}
+      ${author}, ${director}, ${writer}, ${publisher}, ${developer}, ${rating}
     )
   `;
   redirect("/dashboard");
@@ -122,6 +124,7 @@ export const updateEntry = async (id: number, formData: FormData) => {
   const year = formData.get("year") as number | null;
   const description = formData.get("description") as string | null;
   const month = formData.get("month") as string | null;
+  const rating = formData.get("rating") as number | null;
 
   let author = null;
   let director = null;
@@ -156,7 +159,8 @@ export const updateEntry = async (id: number, formData: FormData) => {
     director = ${director},
     writer = ${writer},
     publisher = ${publisher},
-    developer = ${developer}
+    developer = ${developer},
+    rating = ${rating}
   WHERE id = ${id}
 `;
 

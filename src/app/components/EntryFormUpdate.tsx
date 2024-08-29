@@ -16,7 +16,7 @@ export default function EntryFormUpdate({ id }: { id: number }) {
     id: 0,
     title: "",
     genre: "",
-    year: 0,
+    year: "",
     category: "Book",
     month: "",
     author: "",
@@ -25,7 +25,7 @@ export default function EntryFormUpdate({ id }: { id: number }) {
     publisher: "",
     developer: "",
     description: "",
-    rating: 0,
+    rating: undefined,
   });
   const [month, setMonth] = useState<string>("");
   const [category, setCategory] = useState<string>("Book");
@@ -46,7 +46,6 @@ export default function EntryFormUpdate({ id }: { id: number }) {
   };
 
   const handleMonthChange = (month: string) => {
-    console.log("Month", month);
     setMonth(month);
   };
 
@@ -54,7 +53,6 @@ export default function EntryFormUpdate({ id }: { id: number }) {
     e.preventDefault();
 
     const formData = new FormData(formRef.current!);
-    formData.set("month", month);
 
     try {
       await updateEntry(id, formData);
