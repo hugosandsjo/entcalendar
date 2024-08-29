@@ -15,7 +15,7 @@ export default function FormInput({
       <input
         className="p-3 border border-black rounded-md "
         type="text"
-        id={name}
+        id={title}
         name={name}
         defaultValue={defaultValue}
         required

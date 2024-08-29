@@ -39,7 +39,6 @@ export default function EntryForm() {
   };
 
   const handleMonthChange = (month: string) => {
-    console.log("Month", month);
     setMonth(month);
   };
 

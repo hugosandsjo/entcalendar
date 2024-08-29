@@ -11,20 +11,22 @@ export default function FormStar() {
       <h1>Rating</h1>
       <div className="flex">
         {[...Array(5)].map((_, index) => {
-          const currentRate = index + 1;
+          const currentRating = index + 1;
           return (
-            <label key={currentRate}>
+            <label key={currentRating}>
               <input
                 type="radio"
-                name="rate"
-                value={currentRate}
+                name="rating"
+                value={currentRating}
                 className="hidden"
-                onClick={() => setRating(currentRate)}
+                onClick={() => setRating(currentRating)}
               />
               <FaStar
                 size={30}
-                color={currentRate <= (hover ?? rating ?? 0) ? "black" : "grey"}
-                onMouseEnter={() => setHover(currentRate)}
+                color={
+                  currentRating <= (hover ?? rating ?? 0) ? "black" : "grey"
+                }
+                onMouseEnter={() => setHover(currentRating)}
                 onMouseLeave={() => setHover(null)}
               />
             </label>
