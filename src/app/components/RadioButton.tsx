@@ -9,7 +9,7 @@ type RadioButtonProps = {
 function RadioButton({ category, onChange, checked }: RadioButtonProps) {
   return (
     <>
-      <label className="text-2xl rounded cursor-pointer " htmlFor={category}>
+      <label className="text-1xl rounded cursor-pointer " htmlFor={category}>
         <input
           type="radio"
           id={category}
@@ -19,7 +19,7 @@ function RadioButton({ category, onChange, checked }: RadioButtonProps) {
           onChange={onChange}
           checked={checked}
         />
-        <span className="radio-label py-2 px-4 border border-black rounded-3xl">
+        <span className="radio-label py-3 px-5 border border-black rounded-full">
           {category}
         </span>
       </label>

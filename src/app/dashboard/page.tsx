@@ -1,37 +1,67 @@
-import EntryContainer from "../components/EntryContainer";
-import Main from "../components/Main";
-import ProfileClient from "../components/ProfileClient";
-import Month from "../components/Month";
+import EntryContainer from "@/app/components/EntryContainer";
+import Main from "@/app/components/Main";
+import ProfileClient from "@/app/components/ProfileClient";
+import MonthHeading from "@/app/components/MonthHeading";
+import { getEntries } from "@/app/actions/actions";
+import { unstable_noStore as noStore } from "next/cache";
+import { EntryProps } from "@/app/components/Entry";
+import { getSession } from "@auth0/nextjs-auth0";
 
-export default function Dashboard() {
+export default async function Dashboard() {
+  noStore();
+
+  const session = await getSession();
+  const { user } = session || {};
+
+  const monthOrder = [
+    "january",
+    "february",
+    "march",
+    "april",
+    "may",
+    "june",
+    "july",
+    "august",
+    "september",
+    "october",
+    "november",
+    "december",
+  ];
+
+  function capitalizeFirstLetter(string: string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+  if (!user) {
+    return <div>Please log in to see your entries.</div>;
+  }
+
+  const data = await getEntries(user.sub);
+  console.log("Data:", data);
+
+  const entries = Array.isArray(data) ? (data as EntryProps[]) : [];
+
+  const uniqueMonths = Array.from(
+    new Set(entries.map((entry) => entry.month.toLowerCase()))
+  ).sort((a, b) => monthOrder.indexOf(a) - monthOrder.indexOf(b));
+
+  console.log("Sorted Unique Months:", uniqueMonths);
+
   return (
     <>
       <Main>
         <ProfileClient />
-        <Month text="January"></Month>
-        <EntryContainer month="january" />
-        <Month text="February"></Month>
-        <EntryContainer month="february" />
-        <Month text="March"></Month>
-        <EntryContainer month="march" />
-        <Month text="April"></Month>
-        <EntryContainer month="april" />
-        <Month text="May"></Month>
-        <EntryContainer month="may" />
-        <Month text="June"></Month>
-        <EntryContainer month="june" />
-        <Month text="July"></Month>
-        <EntryContainer month="july" />
-        <Month text="August"></Month>
-        <EntryContainer month="august" />
-        <Month text="September"></Month>
-        <EntryContainer month="september" />
-        <Month text="October"></Month>
-        <EntryContainer month="october" />
-        <Month text="November"></Month>
-        <EntryContainer month="november" />
-        <Month text="December"></Month>
-        <EntryContainer month="december" />
+        {uniqueMonths.map((month) => (
+          <div key={month}>
+            <MonthHeading text={capitalizeFirstLetter(month)} />
+            <EntryContainer
+              month={month}
+              entries={entries.filter(
+                (entry) => entry.month.toLowerCase() === month
+              )} // Filter entries for this month
+            />
+          </div>
+        ))}
       </Main>
     </>
   );

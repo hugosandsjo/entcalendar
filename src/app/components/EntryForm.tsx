@@ -1,16 +1,20 @@
 "use client";
 
 import React, { useRef, useEffect, useState } from "react";
-import { useUser } from "@auth0/nextjs-auth0/client";
-import RadioButton from "../components/RadioButton";
-import { addEntry } from "../actions/actions";
-import FormInput from "../components/FormInput";
-import FormInputLarge from "./FormInputLarge";
 
-function EntryForm() {
+import { useUser } from "@auth0/nextjs-auth0/client";
+import RadioButton from "@/app/components/RadioButton";
+import { addEntry } from "@/app/actions/actions";
+import FormInput from "@/app/components/FormInput";
+import FormInputLarge from "@/app/components/FormInputLarge";
+import FormMonth from "@/app/components/FormMonth";
+import FormStar from "@/app/components/FormStar";
+
+export default function EntryForm() {
   const { user, isLoading } = useUser();
   const formRef = useRef<HTMLFormElement>(null);
   const [category, setCategory] = useState<string>("Book");
+  const [month, setMonth] = useState<string>("");
 
   useEffect(() => {
     if (user && formRef.current) {
@@ -34,13 +38,8 @@ function EntryForm() {
     setCategory(e.target.value);
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (formRef.current) {
-      const formData = new FormData(formRef.current);
-      await addEntry(formData);
-      formRef.current.reset();
-    }
+  const handleMonthChange = (month: string) => {
+    setMonth(month);
   };
 
   return (
@@ -48,27 +47,13 @@ function EntryForm() {
       <section className="flex w-screen justify-center mb-12">
         <form
           ref={formRef}
-          className="flex flex-col p-8 gap-y-2"
-          onSubmit={handleSubmit}
+          className="flex flex-col p-1 gap-y-2 w-3/6"
+          action={addEntry}
         >
           <h1 className="text-5xl mb-4">New Entry</h1>
-          <label htmlFor="options">Month</label>
-          <select className="p-4 border border-black" id="month" name="month">
-            <option value="january">January</option>
-            <option value="february">February</option>
-            <option value="march">March</option>
-            <option value="april">April</option>
-            <option value="may">May</option>
-            <option value="june">June</option>
-            <option value="july">July</option>
-            <option value="august">August</option>
-            <option value="september">September</option>
-            <option value="october">October</option>
-            <option value="november">November</option>
-            <option value="december">December</option>
-          </select>
+          <FormMonth onChange={handleMonthChange} />
           <label htmlFor="category">Category</label>
-          <div className="flex gap-2 my-2">
+          <div className="flex gap-2 my-2 py-2">
             {["Book", "Movie", "Series", "Game"].map((cat) => (
               <RadioButton
                 key={cat}
@@ -83,6 +68,7 @@ function EntryForm() {
           <FormInput title="Genre" name="genre" />
           <FormInput title="Year" name="year" />
 
+          {/* Some conditional input fields depending on the category */}
           {category === "Book" && <FormInput title="Author" name="author" />}
           {(category === "Movie" || category === "Series") && (
             <>
@@ -96,10 +82,11 @@ function EntryForm() {
               <FormInput title="Developer" name="developer" />
             </>
           )}
+          <FormStar />
           <FormInputLarge title="Description" name="description" />
           <button
             type="submit"
-            className="mt-4 p-4 border border-black rounded-md bg-black text-white hover:opacity-60 max-w-2xl"
+            className="mt-4 p-4 border border-black rounded-md bg-black text-white hover:opacity-60"
           >
             Submit
           </button>
@@ -108,5 +95,3 @@ function EntryForm() {
     </>
   );
 }
-
-export default EntryForm;

@@ -1,21 +1,25 @@
 type FormInputProps = {
   title: string;
   name: string;
+  defaultValue?: string | number | undefined;
 };
 
-function FormInput({ title, name }: FormInputProps) {
+export default function FormInput({
+  title,
+  name,
+  defaultValue,
+}: FormInputProps) {
   return (
     <>
       <label htmlFor={title}>{title}</label>
       <input
         className="p-3 border border-black rounded-md "
         type="text"
-        id={name}
+        id={title}
         name={name}
+        defaultValue={defaultValue}
         required
       ></input>
     </>
   );
 }
-
-export default FormInput;
