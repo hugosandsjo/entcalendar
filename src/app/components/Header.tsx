@@ -8,7 +8,7 @@ function Header() {
     <header className="h-28 px-10 flex justify-between items-center">
       <Link href="/">
         {" "}
-        <h1 className="text-4xl hover:opacity-30">ENTcalendar</h1>
+        <h1 className="text-4xl hover:opacity-30">ENTcalendarr</h1>
       </Link>
       <Link href="/dashboard">
         <p className="hover:underline">Dashboard</p>
